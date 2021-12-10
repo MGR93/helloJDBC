@@ -6,12 +6,12 @@
     </welcome-file-list>
     <servlet>
         <description></description>
-        <display-name>UserController</display-name>
-        <servlet-name>UserController</servlet-name>
+        <display-name>UserServlet</display-name>
+        <servlet-name>UserServlet</servlet-name>
         <servlet-class>ru.home.usertableapp.web.UsersServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserController</servlet-name>
-        <url-pattern>/UserController</url-pattern>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/UserServlet</url-pattern>
     </servlet-mapping>
 </web-app>
