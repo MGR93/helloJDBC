@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    public Connection connection = null;
+    public Connection connection;
 
     public UserDAO() {
         try {
-            connection = getConnection();
+            DriverManager.registerDriver(new Driver());
+            connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db,", "mgr_admin", "31101993");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -25,14 +26,6 @@ public class UserDAO {
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?;";
     private static final String UPDATE_USERS_SQL = "UPDATE users SET firstname = ?, lastname = ?, age =? WHERE id = ?;";
-    public Connection getConnection() throws SQLException {
-    Connection connection ;
-
-                DriverManager.registerDriver(new Driver());
-                connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db,", "mgr_admin", "31101993");
-
-     return connection;
-        }
 
 
     public void addUser(User user) {
@@ -87,7 +80,7 @@ public class UserDAO {
             ResultSet rs = statement.executeQuery(SELECT_ALL_USERS);
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getInt("userid"));
+                user.setId(rs.getInt("id"));
                 user.setFirstname(rs.getString("firstname"));
                 user.setLastname(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
@@ -109,7 +102,7 @@ public class UserDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                user.setId(rs.getInt("userid"));
+                user.setId(rs.getInt("id"));
                 user.setFirstname(rs.getString("firstname"));
                 user.setLastname(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
