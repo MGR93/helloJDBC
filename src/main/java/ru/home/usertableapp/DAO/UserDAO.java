@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    public final Connection connection;
+    public Connection connection = null;
 
     public UserDAO() {
-        connection = getConnection();
+        try {
+            connection = getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (firstname, lastname, age) VALUES " +
@@ -21,14 +25,12 @@ public class UserDAO {
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?;";
     private static final String UPDATE_USERS_SQL = "UPDATE users SET firstname = ?, lastname = ?, age =? WHERE id = ?;";
-    public Connection getConnection() {
-    Connection connection = null;
-    try {
+    public Connection getConnection() throws SQLException {
+    Connection connection ;
+
                 DriverManager.registerDriver(new Driver());
                 connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db,", "mgr_admin", "31101993");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
      return connection;
         }
 
