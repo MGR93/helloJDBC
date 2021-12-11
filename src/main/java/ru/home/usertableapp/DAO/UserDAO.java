@@ -24,9 +24,9 @@ public class UserDAO {
     public Connection getConnection() {
     Connection connection = null;
     try {
-                Class.forName("org.postgresql.Driver");
+                DriverManager.registerDriver(new Driver());
                 connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db,", "mgr_admin", "31101993");
-            } catch (SQLException | ClassNotFoundException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
      return connection;
