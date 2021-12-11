@@ -6,6 +6,6 @@
     <title>Users</title>
 </head>
 <body>
-<jsp:forward page="/UsersServlet?action=listUser.jsp" />
+<jsp:forward page="/UsersServlet?action=listUser" />
 </body>
 </html>

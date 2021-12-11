@@ -26,12 +26,12 @@
             <td><c:out value="${user.firstName}" /></td>
             <td><c:out value="${user.lastName}" /></td>
             <td><c:out value="${user.age}" /></td>
-            <td><a href="UserServlet?action=edit&userId=<c:out value="${user.userid}"/>">Update</a></td>
-            <td><a href="UserServlet?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
+            <td><a href="UsersServlet?action=edit&userId=<c:out value="${user.userid}"/>">Update</a></td>
+            <td><a href="UsersServlet?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<p><a href="UserServlet?action=insert">Add User</a></p>
+<p><a href="UsersServlet?action=insert">Add User</a></p>
 </body>
 </html>
