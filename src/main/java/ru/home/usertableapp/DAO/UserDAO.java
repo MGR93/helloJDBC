@@ -9,10 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    private final Connection connection;
+    public Connection connection;
 
     public UserDAO() {
-        connection = DbUtil.getConnection();
+        try {
+            DriverManager.registerDriver(new Driver());
+            connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db,", "mgr_admin", "31101993");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (firstname, lastname, age) VALUES " +
@@ -75,7 +80,7 @@ public class UserDAO {
             ResultSet rs = statement.executeQuery(SELECT_ALL_USERS);
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getInt("userid"));
+                user.setId(rs.getInt("id"));
                 user.setFirstname(rs.getString("firstname"));
                 user.setLastname(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
@@ -97,7 +102,7 @@ public class UserDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                user.setId(rs.getInt("userid"));
+                user.setId(rs.getInt("id"));
                 user.setFirstname(rs.getString("firstname"));
                 user.setLastname(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
