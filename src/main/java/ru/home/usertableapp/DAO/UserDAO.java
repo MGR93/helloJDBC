@@ -80,6 +80,7 @@ public class UserDAO {
                 user.setLastname(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
                 users.add(user);
+                System.out.println(user.toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
