@@ -16,21 +16,9 @@ public class DbUtil {
             return connection;
         else {
             try {
-                Properties prop = new Properties();
-                InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("/db.properties");
-                prop.load(inputStream);
-                String driver = prop.getProperty("driver");
-                String url = prop.getProperty("url");
-                String user = prop.getProperty("user");
-                String password = prop.getProperty("password");
-                try {
-                    Class.forName(driver);
-                } catch (ClassNotFoundException e){
-                    System.out.println("Где драйвер?");
-                }
-
-                connection = DriverManager.getConnection(url, user, password);
-            } catch ( SQLException | IOException e) {
+                Class.forName("org.postgresql.Driver");
+                connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db," ,"mgr_admin", "31101993");
+            } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
             return connection;
