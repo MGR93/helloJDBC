@@ -23,9 +23,14 @@ public class DbUtil {
                 String url = prop.getProperty("url");
                 String user = prop.getProperty("user");
                 String password = prop.getProperty("password");
-                Class.forName(driver);
+                try {
+                    Class.forName(driver);
+                } catch (ClassNotFoundException e){
+                    System.out.println("Где драйвер?");
+                }
+
                 connection = DriverManager.getConnection(url, user, password);
-            } catch (ClassNotFoundException | SQLException | IOException e) {
+            } catch ( SQLException | IOException e) {
                 e.printStackTrace();
             }
             return connection;
