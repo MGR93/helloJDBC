@@ -49,8 +49,8 @@ public class UsersServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
-        user.setFirstname(request.getParameter("firstName"));
-        user.setLastname(request.getParameter("lastName"));
+        user.setFirstname(request.getParameter("firstname"));
+        user.setLastname(request.getParameter("lastname"));
         user.setAge(Integer.parseInt(request.getParameter("age")));
 
         String userid = request.getParameter("id");

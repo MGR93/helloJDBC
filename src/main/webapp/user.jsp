@@ -22,11 +22,11 @@
     User ID : <input type="text" readonly="readonly" name="id"
                      value="<c:out value="${user.id}" />" /> <br />
     First Name : <input
-        type="text" name="firstName"
-        value="<c:out value="${user.firstName}" />" /> <br />
+        type="text" name="firstname"
+        value="<c:out value="${user.firstname}" />" /> <br />
     Last Name : <input
-        type="text" name="lastName"
-        value="<c:out value="${user.lastName}" />" /> <br />
+        type="text" name="lastname"
+        value="<c:out value="${user.lastname}" />" /> <br />
     Age : <input type="text" name="age"
                    value="<c:out value="${user.age}" />" /> <br /> <input
         type="submit" value="Submit" />

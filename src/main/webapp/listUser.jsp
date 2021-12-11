@@ -23,11 +23,11 @@
     <c:forEach items="${users}" var="user">
         <tr>
             <td><c:out value="${user.id}" /></td>
-            <td><c:out value="${user.firstName}" /></td>
-            <td><c:out value="${user.lastName}" /></td>
+            <td><c:out value="${user.firstname}" /></td>
+            <td><c:out value="${user.lastname}" /></td>
             <td><c:out value="${user.age}" /></td>
-            <td><a href="UsersServlet?action=edit&userId=<c:out value="${user.id}"/>">Update</a></td>
-            <td><a href="UsersServlet?action=delete&userId=<c:out value="${user.id}"/>">Delete</a></td>
+            <td><a href="UsersServlet?action=edit&Id=<c:out value="${user.id}"/>">Update</a></td>
+            <td><a href="UsersServlet?action=delete&Id=<c:out value="${user.id}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>

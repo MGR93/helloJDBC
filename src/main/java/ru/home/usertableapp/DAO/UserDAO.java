@@ -15,10 +15,10 @@ public class UserDAO {
          connection = DbUtil.getConnection();
     }
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (firstname, lastname, age) VALUES " +
+    private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (firstname, lastname, age) VALUES  " +
             " (?, ?, ?);";
-    private static final String SELECT_USER_BY_ID = "SELECT id,firstname,lastname,age FROM users WHERE id =?";
-    private static final String SELECT_ALL_USERS = "SELECT * FROM users";
+    private static final String SELECT_USER_BY_ID = "SELECT id,firstname,lastname,age FROM users WHERE id =?;";
+    private static final String SELECT_ALL_USERS = "SELECT * FROM users;";
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?;";
     private static final String UPDATE_USERS_SQL = "UPDATE users SET firstname = ?, lastname = ?, age =? WHERE id = ?;";
 
@@ -39,12 +39,12 @@ public class UserDAO {
         }
     }
 
-    public void deleteUser(int userId) {
+    public void deleteUser(int Id) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_USERS_SQL);
             // Parameters start with 1
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(1, Id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -88,12 +88,12 @@ public class UserDAO {
         return users;
     }
 
-    public User getUserById(int userId) {
+    public User getUserById(int Id) {
         User user = new User();
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement(SELECT_USER_BY_ID);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(1, Id);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
