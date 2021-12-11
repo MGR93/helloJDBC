@@ -3,9 +3,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-    <title>Insert title here</title>
+    <title>Users</title>
 </head>
 <body>
-<jsp:forward page="/UsersServlet?action=listUser" />
+<jsp:forward page="/UsersServlet?action=listUser.jsp" />
 </body>
 </html>
