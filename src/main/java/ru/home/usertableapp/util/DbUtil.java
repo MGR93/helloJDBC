@@ -12,22 +12,16 @@ public class DbUtil {
     private static Connection connection;
 
     public static Connection getConnection() {
-        if (connection != null)
-            return connection;
-        else {
+
+
             try {
                 Class.forName("org.postgresql.Driver").newInstance();
                 connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db," ,"mgr_admin", "31101993");
                 connection.close();
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
             }
-            return connection;
-        }
+        return connection;
 
     }
 }
