@@ -12,12 +12,7 @@ public class UserDAO {
     public Connection connection;
 
     public UserDAO() {
-        try {
-            DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db,", "mgr_admin", "31101993");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+         connection = DbUtil.getConnection();
     }
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (firstname, lastname, age) VALUES " +
