@@ -16,7 +16,7 @@ public class DbUtil {
 
             try {
                 Class.forName("org.postgresql.Driver").newInstance();
-                connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db," ,"mgr_admin", "31101993");
+                connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db" ,"mgr_admin", "31101993");
                 connection.close();
             } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
