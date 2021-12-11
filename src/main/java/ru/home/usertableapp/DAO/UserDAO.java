@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    private final Connection connection;
+    public final Connection connection;
 
     public UserDAO() {
-        connection = DbUtil.getConnection();
+        connection = getConnection();
     }
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (firstname, lastname, age) VALUES " +
@@ -21,6 +21,16 @@ public class UserDAO {
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?;";
     private static final String UPDATE_USERS_SQL = "UPDATE users SET firstname = ?, lastname = ?, age =? WHERE id = ?;";
+    public Connection getConnection() {
+    Connection connection = null;
+    try {
+                Class.forName("org.postgresql.Driver");
+                connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db,", "mgr_admin", "31101993");
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+     return connection;
+        }
 
 
     public void addUser(User user) {
