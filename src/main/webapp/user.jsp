@@ -19,8 +19,8 @@
 <%--</script>--%>
 
 <form method="POST" action='UsersServlet' name="frmAddUser">
-    User ID : <input type="text" readonly="readonly" name="userid"
-                     value="<c:out value="${user.userid}" />" /> <br />
+    User ID : <input type="text" readonly="readonly" name="id"
+                     value="<c:out value="${user.id}" />" /> <br />
     First Name : <input
         type="text" name="firstName"
         value="<c:out value="${user.firstName}" />" /> <br />

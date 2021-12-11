@@ -27,13 +27,13 @@ public class UsersServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")){
-            int userId = Integer.parseInt(request.getParameter("userId"));
+            int userId = Integer.parseInt(request.getParameter("Id"));
             dao.deleteUser(userId);
             forward = LIST_USER;
             request.setAttribute("users", dao.getAllUsers());
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
-            int userId = Integer.parseInt(request.getParameter("userId"));
+            int userId = Integer.parseInt(request.getParameter("Id"));
             User user = dao.getUserById(userId);
             request.setAttribute("user", user);
         } else if (action.equalsIgnoreCase("listUser")){
@@ -53,7 +53,7 @@ public class UsersServlet extends HttpServlet {
         user.setLastname(request.getParameter("lastName"));
         user.setAge(Integer.parseInt(request.getParameter("age")));
 
-        String userid = request.getParameter("userid");
+        String userid = request.getParameter("id");
         if(userid == null || userid.isEmpty())
         {
             dao.addUser(user);
