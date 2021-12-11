@@ -20,15 +20,14 @@
     </tr>
     </thead>
     <tbody>
-    <jsp:useBean id="users" scope="request" type="java.util.List"/>
     <c:forEach items="${users}" var="user">
         <tr>
-            <td><c:out value="${user.id}" /></td>
-            <td><c:out value="${user.firstname}" /></td>
-            <td><c:out value="${user.lastname}" /></td>
-            <td><c:out value="${user.age}" /></td>
-            <td><a href="UsersServlet?action=edit&Id=<c:out value="${user.id}"/>">Update</a></td>
-            <td><a href="UsersServlet?action=delete&Id=<c:out value="${user.id}"/>">Delete</a></td>
+            <td><c:out value="${user.getId}" /></td>
+            <td><c:out value="${user.getFirstname}" /></td>
+            <td><c:out value="${user.getLastname}" /></td>
+            <td><c:out value="${user.getAge}" /></td>
+            <td><a href="UsersServlet?action=edit&Id=<c:out value="${user.getId}"/>">Update</a></td>
+            <td><a href="UsersServlet?action=delete&Id=<c:out value="${user.getId}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
