@@ -16,7 +16,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Age</th>
-        <th colspan=2>Action</th>
+        <th colspan=2>Actions</th>
     </tr>
     </thead>
     <tbody>
