@@ -1,8 +1,6 @@
 package ru.home.usertableapp.DAO;
 
-import org.postgresql.Driver;
 import ru.home.usertableapp.model.User;
-import ru.home.usertableapp.util.DbUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,13 +30,10 @@ public class UserDAO {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(INSERT_USERS_SQL);
-            // Parameters start with 1
             preparedStatement.setString(1, user.getFirstname());
             preparedStatement.setString(2, user.getLastname());
             preparedStatement.setInt(3, user.getAge());
-
             preparedStatement.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,10 +43,8 @@ public class UserDAO {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_USERS_SQL);
-            // Parameters start with 1
             preparedStatement.setInt(1, Id);
             preparedStatement.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,13 +54,11 @@ public class UserDAO {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(UPDATE_USERS_SQL);
-            // Parameters start with 1
             preparedStatement.setString(1, user.getFirstname());
             preparedStatement.setString(2, user.getLastname());
             preparedStatement.setInt(3, user.getAge());
             preparedStatement.setInt(4, user.getId());
             preparedStatement.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,12 +76,10 @@ public class UserDAO {
                 user.setLastname(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
                 users.add(user);
-                System.out.println(user.toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return users;
     }
 

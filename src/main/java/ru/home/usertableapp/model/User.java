@@ -17,9 +17,6 @@ public class User {
         this.age = age;
     }
 
-    public User(int id, String firstname, String lastname, int age) {
-    }
-
     public String getFirstname() {
         return firstname;
     }

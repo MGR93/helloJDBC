@@ -12,11 +12,6 @@
     <title>Add new user</title>
 </head>
 <body>
-<%--<script>--%>
-<%--    $(function() {--%>
-<%--        $('input[name=dob]').datepicker();--%>
-<%--    });--%>
-<%--</script>--%>
 
 <form method="POST" action='UsersServlet' name="frmAddUser">
     User ID : <input type="text" readonly="readonly" name="id"
