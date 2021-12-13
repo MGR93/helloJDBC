@@ -32,12 +32,14 @@ public class UserDAO {
 
     public void addUser(User user) {
         try(Connection connection = ds.getConnection()) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             PreparedStatement preparedStatement = connection
                     .prepareStatement(INSERT_USERS_SQL);
             preparedStatement.setString(1, user.getFirstname());
             preparedStatement.setString(2, user.getLastname());
             preparedStatement.setInt(3, user.getAge());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,10 +47,12 @@ public class UserDAO {
 
     public void deleteUser(int Id) {
         try(Connection connection = ds.getConnection()) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_USERS_SQL);
             preparedStatement.setInt(1, Id);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,6 +60,7 @@ public class UserDAO {
 
     public void updateUser(User user) {
         try(Connection connection = ds.getConnection()) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             PreparedStatement preparedStatement = connection
                     .prepareStatement(UPDATE_USERS_SQL);
             preparedStatement.setString(1, user.getFirstname());
@@ -63,6 +68,7 @@ public class UserDAO {
             preparedStatement.setInt(3, user.getAge());
             preparedStatement.setInt(4, user.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,6 +77,7 @@ public class UserDAO {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try(Connection connection = ds.getConnection()) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(SELECT_ALL_USERS);
             while (rs.next()) {
@@ -81,6 +88,7 @@ public class UserDAO {
                 user.setAge(rs.getInt("age"));
                 users.add(user);
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,6 +98,7 @@ public class UserDAO {
     public User getUserById(int Id) {
         User user = new User();
         try(Connection connection = ds.getConnection()) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             PreparedStatement preparedStatement = connection.
                     prepareStatement(SELECT_USER_BY_ID);
             preparedStatement.setInt(1, Id);
@@ -101,6 +110,7 @@ public class UserDAO {
                 user.setLastname(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
             }
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
