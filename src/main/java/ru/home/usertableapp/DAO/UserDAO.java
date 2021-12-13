@@ -1,5 +1,6 @@
 package ru.home.usertableapp.DAO;
 
+import org.postgresql.ds.PGSimpleDataSource;
 import ru.home.usertableapp.model.User;
 
 import java.sql.*;
@@ -7,15 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    public Connection connection;
+    public static PGSimpleDataSource ds;
+
+    static  {
+        ds = new PGSimpleDataSource();
+        ds.setServerName("192.168.0.18");
+        ds.setPortNumber(5432);
+        ds.setDatabaseName("test_db");
+        ds.setUser("mgr_admin");
+        ds.setPassword("31101993");
+    }
 
     public UserDAO() {
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://192.168.0.18:5432/test_db" ,"mgr_admin", "31101993");
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (firstname, lastname, age) VALUES  " +
@@ -27,7 +31,7 @@ public class UserDAO {
 
 
     public void addUser(User user) {
-        try {
+        try(Connection connection = ds.getConnection()) {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(INSERT_USERS_SQL);
             preparedStatement.setString(1, user.getFirstname());
@@ -40,7 +44,7 @@ public class UserDAO {
     }
 
     public void deleteUser(int Id) {
-        try {
+        try(Connection connection = ds.getConnection()) {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_USERS_SQL);
             preparedStatement.setInt(1, Id);
@@ -51,7 +55,7 @@ public class UserDAO {
     }
 
     public void updateUser(User user) {
-        try {
+        try(Connection connection = ds.getConnection()) {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(UPDATE_USERS_SQL);
             preparedStatement.setString(1, user.getFirstname());
@@ -66,7 +70,7 @@ public class UserDAO {
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        try {
+        try(Connection connection = ds.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(SELECT_ALL_USERS);
             while (rs.next()) {
@@ -85,7 +89,7 @@ public class UserDAO {
 
     public User getUserById(int Id) {
         User user = new User();
-        try {
+        try(Connection connection = ds.getConnection()) {
             PreparedStatement preparedStatement = connection.
                     prepareStatement(SELECT_USER_BY_ID);
             preparedStatement.setInt(1, Id);
